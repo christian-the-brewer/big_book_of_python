@@ -28,10 +28,31 @@ def main():
   
   #for each person, generate a month and day
   birthdays = get_birthdays(num_people)
+  i = 1
   #iterate over list of birthdays and print out
   for birthday in birthdays:
-    print(birthday, end=", ")
-  print(get_matches(birthdays))
+    if i < num_people:
+      print(birthday, end=", ")
+    else:
+      print(f"and {birthday}", end=".\n")
+    i += 1
+  matches = get_matches(birthdays)
+  if len(matches) == 0:
+    print("In this simulation, no one has matching birthdays.")
+  else:
+    i = 1
+    print("In this simulation, multiple people have a birthday on ",end="")
+    for birthday in matches:
+      if i < len(matches):
+        print(birthday, end=", ")
+      else:
+        if len(matches) == 1:
+          print(birthday, end=".")
+        else:
+          print(f"and {birthday}", end=".\n")
+      i += 1
+  run_simulation(num_people, 100000)
+    
   
 
 
@@ -49,7 +70,21 @@ def get_birthdays(number):
 def get_matches(birthdays):
   matches = set()
   shared_birthdays = {birthday for birthday in birthdays if birthday in matches or (matches.add(birthday) or False)}
-  return matches
+  return shared_birthdays
 
+def run_simulation(num_birthdays, samples):
+  i = 0
+  matching_sims = 0
+
+  while (i < samples):
+    birthdays = get_birthdays(num_birthdays)
+    matches = get_matches(birthdays)
+    if matches:
+      matching_sims += 1
+    i += 1
+    if i % 10000 == 0:
+      print(f"{i} simulations run...")
+  result = (matching_sims / samples) * 100
+  print(f"Out of {samples} simulations of {num_birthdays}, there was a matching birthday in that group {matching_sims} times. This means that {num_birthdays} people have a {result}% chance of having a matching birthday in their group.\nThat's probably more than you would think!")
   
 main()
