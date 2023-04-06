@@ -1,5 +1,6 @@
 #blackjack by Christian Brewer
 
+
 import random, sys
 
 #Constants
@@ -27,4 +28,46 @@ def main():
   while True: #game loop
     #check if player has money
     if money <= 0:
-      print("You are broke!")
+      print("You are broke!\nThanks for playing!")
+      sys.exit()
+    #Enter bet 
+    print(f"Money: {money}")
+    bet = getBet(money)
+
+    #Give healer and player two cards from the deck
+    deck = getDeck()
+    dealerHand = [deck.pop(), deck.pop()]
+    playerHand = [deck.pop(), deck.pop()]
+
+    #handle player actions
+    print(f"Bet: {bet}")
+    #looping until player stands or busts
+    while True:
+      displayHands(playerHand, dealerHand, False)
+      print()
+
+      #check if player has bust
+      if getHandValue(playerHand) > 21:
+        break
+
+      #get player'compile
+      move = getMove(playerHand, money - bet)
+
+      #handle player action
+      if move == "d":
+        #player is doubling down
+        additionalBet = getBet(min(bet, (money - bet)))
+        bet += additionalBet
+        print(f"Bet increased to {bet}.")
+        print(f"Bet:{bet}")
+
+      if move in ("h", "d"):
+        newCard = deck.pop()
+        rank, suit = newCard
+        print(f"You drew a {rank} of {suit}.")
+        playerHand.append(newCard)
+        if getHandValue(playerHand) > 21:
+          continue
+
+      if move in ("s", "d"):
+        break
