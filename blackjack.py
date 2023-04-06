@@ -1,6 +1,5 @@
 #blackjack by Christian Brewer
 
-
 import random, sys
 
 #Constants
@@ -71,3 +70,29 @@ def main():
 
       if move in ("s", "d"):
         break
+
+    #handle dealer actions
+    if getHandValue(playerHand) <= 21:
+      while getHandValue(dealerHand) < 17:
+        #dealer hits
+        print("Dealer hits...")
+        dealerHand.append(deck.pop())
+        displayHands(playerHand, dealerHand, False)
+        if getHandValue(dealerHand) > 21:
+          breakpoint
+        input("Press Enter to continue...")
+        print("\n\n")
+
+    displayHands(playerHand, dealerHand, True)
+    playerValue = getHandValue(playerHand)
+    dealerValue = getHandValue(dealerHand)
+    if dealerValue > 21:
+      print(f"Dealer busts! You win {bet}!")
+      money += bet
+    elif (playerValue > 21) or (playerValue < dealerValue):
+      print("You lose!")
+      money -= bet
+    elif playerValue > dealerValue:
+      print(f"You win {bet}!")
+      money += bet
+        
