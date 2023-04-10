@@ -1,4 +1,5 @@
 #blackjack by Christian Brewer
+#https://inventwithpython.com/bigbookpython/project4.html
 
 import random, sys
 
