@@ -96,4 +96,11 @@ def main():
     elif playerValue > dealerValue:
       print(f"You win {bet}!")
       money += bet
+    elif playerValue == dealerValue:
+      print("It's a tie!")
+
+    input("Press Enter to continue...")
+    print("\n\n")
+
+def getBet(maxBet):
         
