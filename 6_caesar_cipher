@@ -1,5 +1,5 @@
 """Caesar Cipher from https://inventwithpython.com/bigbookpython/project6.html"""
-
+"""
 try: 
   import pyperclip #copies text to clipboard
 except ImportError:
@@ -70,5 +70,22 @@ try:
   print(f'{mode}ed message copied to clipboard.')
 except:
   pass
-  
-  
+  """
+try:
+  import pyperclip #try to import pyperclip and pass if not installed
+except:
+  pass
+
+#loop to get encryption mode
+while True:
+  print('Would you like to (e)ncrypt or (d)ecrypt a message?')
+  response = input('> ').lower()
+
+  #test response
+  if response.startswith('e'):
+    mode = 'encrypt'
+    break
+  elif response.startswith('d'):
+    mode = 'decrypt'
+    break
+  print('Enter e or d')
