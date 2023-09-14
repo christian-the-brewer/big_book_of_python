@@ -76,6 +76,11 @@ try:
 except:
   pass
 
+#list of all symbols to be translated
+SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ.'
+#len of symbol list
+len_symbol = len(SYMBOLS)
+
 #loop to get encryption mode
 while True:
   print('Would you like to (e)ncrypt or (d)ecrypt a message?')
@@ -89,3 +94,47 @@ while True:
     mode = 'decrypt'
     break
   print('Enter e or d')
+
+#user enter the translation key
+while True:
+  max_key = len_symbol - 1
+  print(f'Enter the cipher key (1 - {max_key}) to use:')
+  response = input("> ").upper()
+  if not response.isdecimal():
+    continue
+    
+  if 0 < int(response) <= max_key:
+    key = int(response)
+    break
+  print()
+
+#user enter the message
+print(f'Enter message to {mode}:')
+message = input('> ').upper()
+
+#variable to hold translated message
+translated = ''
+
+#translate each symbol in message
+for symbol in message:
+  if symbol in SYMBOLS:
+    num = SYMBOLS.find(symbol) #find index of symbol in list
+    if mode == 'encrypt':
+      num = num + key
+    elif mode == 'decrypt':
+      num = num - key
+
+    #handle wrapping around list
+    if num >= len_symbol:
+      num = num - len_symbol
+    elif num < 0:
+      num = num + len_symbol
+
+    translated = translated + SYMBOLS[num]
+
+  else:
+    translated = translated + symbol
+
+#display translated message
+print(translated)
+
