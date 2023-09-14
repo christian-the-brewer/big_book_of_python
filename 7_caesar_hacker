@@ -3,4 +3,13 @@
 """Caesar Hacker by Christian Brewer
 a brute force hack of a caesar cipher"""
 
-print('')
+print('Enter an Caesar Cipher encrypted message: ')
+message = input('> ').upper()
+
+#list of symbols must match
+SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+for key in range(len(SYMBOLS)):
+  translated = ''
+
+#decryt
