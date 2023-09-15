@@ -49,3 +49,11 @@ def get_calendar(year, month):
         cal_text += f"...{DAYS[i]}"
     cal_text += '..\n'
     
+    #horizontal week separators
+    week_separator = f"{'+---------' * 7}+\n"
+    
+    #blank rows
+    blank_row = f"{'|          ' * 7}+\n"
+    
+    #get first date in month
+    current_date = datetime.date(year, month, 1)
