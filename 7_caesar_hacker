@@ -12,4 +12,6 @@ SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 for key in range(len(SYMBOLS)):
   translated = ''
 
-#decryt
+  #decrypt each symbol in message
+  for symbol in message:
+    if symbol in SYMb
