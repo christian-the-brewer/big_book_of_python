@@ -57,3 +57,18 @@ def get_calendar(year, month):
     
     #get first date in month
     current_date = datetime.date(year, month, 1)
+    
+    #rollback currentdate to sunday
+    while current_date.weekday() != 6:
+        current_date -= datetime.timedelta(days=1)
+    
+    while True:
+        cal_text += week_separator
+        
+        #row with day number labels
+        day_number_row = ''
+        for i in range(7):
+            day_number_label = str(current_date.day).rjust(2)
+            day_number_row += f"|{day_number_label}{' ' * 8}"
+            current_date += datetime.timedelta(days=1)
+            
